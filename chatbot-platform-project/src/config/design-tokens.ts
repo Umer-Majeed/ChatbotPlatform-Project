@@ -2,7 +2,7 @@
  * Central Design Token System
  * ----------------------------------------------------------------
  * Single source of truth for colors, spacing, radius, typography.
- * Palette badalni ho to sirf yahan edit karo — poori app update ho jayegi.
+ * Repixm badalni ho to sirf yahan edit karo — poori app update ho jayegi.
  */
 
 export const colors = {

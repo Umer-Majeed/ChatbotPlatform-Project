@@ -23,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Palette — The AI assistant that becomes your business",
+  title: "Repixm — The AI assistant that becomes your business",
   description:
     "Add your website URL and get a fully-trained AI assistant that speaks like your business.",
 };
