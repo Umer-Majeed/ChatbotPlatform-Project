@@ -27,7 +27,7 @@ export const spacing = {
   md: "16px",
   lg: "24px",
   xl: "40px",
-  "2xl": "64px",
+  "2xl": "66px",
 } as const;
 
 export const motion = {
