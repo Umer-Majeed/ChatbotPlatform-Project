@@ -1,14 +1,50 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Magnetic } from "@/components/ui/magnetic";
 import { AuthVisual } from "@/components/features/auth/auth-visual";
 
 export default function SignupPage() {
+  const router = useRouter();
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.error ?? "Kuch galat ho gaya.");
+      setLoading(false);
+      return;
+    }
+
+    // Signup ke turant baad automatically login bhi kar do
+    await signIn("credentials", {
+      email: form.email,
+      password: form.password,
+      redirect: false,
+    });
+
+    router.push("/dashboard");
+  }
+
   return (
     <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
       <AuthVisual />
@@ -29,13 +65,37 @@ export default function SignupPage() {
           </h1>
           <p className="mt-2 text-sm text-muted">Takes about three minutes.</p>
 
-          <form className="mt-8 space-y-4">
-            <Input label="Full name" type="text" autoComplete="name" />
-            <Input label="Email" type="email" autoComplete="email" />
-            <Input label="Password" type="password" autoComplete="new-password" />
+          <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+            <Input
+              label="Full name"
+              type="text"
+              autoComplete="name"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              required
+            />
+            <Input
+              label="Email"
+              type="email"
+              autoComplete="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+            />
+            <Input
+              label="Password"
+              type="password"
+              autoComplete="new-password"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              required
+            />
+
+            {error && <p className="text-sm text-red-500">{error}</p>}
+
             <Magnetic strength={0.15}>
-              <Button type="submit" className="w-full">
-                Create account
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Creating account..." : "Create account"}
                 <ArrowRight size={15} />
               </Button>
             </Magnetic>

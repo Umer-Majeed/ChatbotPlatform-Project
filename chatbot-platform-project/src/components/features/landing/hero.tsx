@@ -1,13 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/ui/magnetic";
 import { ScrambleText } from "@/components/ui/scramble-text";
 import { PersonaWidget } from "@/components/features/landing/persona-widget";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
   visible: (delay: number) => ({
     opacity: 1,
@@ -28,7 +28,6 @@ export function Hero() {
       onMouseMove={handleMouseMove}
       className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 overflow-hidden px-6 pb-24 pt-16 md:grid-cols-2 md:pt-24"
     >
-      {/* Mouse-reactive glow — cursor ke aas-pass halki roshni */}
       <div
         className="pointer-events-none absolute inset-0 -z-10 opacity-70 transition-opacity"
         style={{

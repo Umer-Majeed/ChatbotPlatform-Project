@@ -3,6 +3,7 @@ import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
 import { CustomCursor } from "@/components/ui/custom-cursor";
+import { AuthSessionProvider } from "@/providers/session-provider";
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
@@ -36,6 +37,11 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <AuthSessionProvider>
+  <div className="grain-overlay" />
+  <CustomCursor />
+  <SmoothScrollProvider>{children}</SmoothScrollProvider>
+</AuthSessionProvider>
         <div className="grain-overlay" />
         <CustomCursor />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
