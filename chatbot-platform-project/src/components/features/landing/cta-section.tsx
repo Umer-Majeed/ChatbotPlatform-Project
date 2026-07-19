@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/ui/magnetic";
 
 export function CTASection() {
   return (
@@ -24,10 +25,12 @@ export function CTASection() {
           transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 flex justify-center"
         >
-          <Button size="lg">
-            Build my assistant
-            <ArrowRight size={16} />
-          </Button>
+          <Magnetic strength={0.3}>
+            <Button size="lg">
+              Build my assistant
+              <ArrowRight size={16} />
+            </Button>
+          </Magnetic>
         </motion.div>
       </div>
     </section>

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
-// Headlines ke liye — editorial serif italic
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   subsets: ["latin"],
@@ -10,13 +11,11 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
 });
 
-// Body text ke liye — clean aur readable
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
-// Code/technical labels ke liye
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
@@ -37,7 +36,9 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
+        <div className="grain-overlay" />
+        <CustomCursor />
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
   );

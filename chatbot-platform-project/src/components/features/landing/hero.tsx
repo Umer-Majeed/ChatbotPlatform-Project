@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/ui/magnetic";
+import { ScrambleText } from "@/components/ui/scramble-text";
 import { PersonaWidget } from "@/components/features/landing/persona-widget";
 
 const fadeUp = {
@@ -15,8 +17,26 @@ const fadeUp = {
 };
 
 export function Hero() {
+  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--x", `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty("--y", `${e.clientY - rect.top}px`);
+  }
+
   return (
-    <section className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 pb-24 pt-16 md:grid-cols-2 md:pt-24">
+    <section
+      onMouseMove={handleMouseMove}
+      className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 overflow-hidden px-6 pb-24 pt-16 md:grid-cols-2 md:pt-24"
+    >
+      {/* Mouse-reactive glow — cursor ke aas-pass halki roshni */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-70 transition-opacity"
+        style={{
+          background:
+            "radial-gradient(500px circle at var(--x, 50%) var(--y, 50%), rgba(86,82,84,0.07), transparent 70%)",
+        }}
+      />
+
       <div>
         <motion.span
           initial="hidden"
@@ -28,17 +48,11 @@ export function Hero() {
           Trained on your website in minutes
         </motion.span>
 
-        <motion.h1
-          initial="hidden"
-          animate="visible"
-          custom={0.1}
-          variants={fadeUp}
-          className="mt-6 font-display text-5xl italic leading-[1.05] text-foreground md:text-6xl"
-        >
-          One assistant.
+        <h1 className="mt-6 font-display text-5xl italic leading-[1.05] text-foreground md:text-6xl">
+          <ScrambleText text="One assistant." delay={200} />
           <br />
-          Every business.
-        </motion.h1>
+          <ScrambleText text="Every business." delay={500} />
+        </h1>
 
         <motion.p
           initial="hidden"
@@ -65,10 +79,12 @@ export function Hero() {
             placeholder="yourbusiness.com"
             className="w-full bg-transparent text-sm text-foreground placeholder:text-muted focus:outline-none"
           />
-          <Button size="sm" className="shrink-0">
-            Build my assistant
-            <ArrowRight size={15} />
-          </Button>
+          <Magnetic strength={0.25}>
+            <Button size="sm" className="shrink-0">
+              Build my assistant
+              <ArrowRight size={15} />
+            </Button>
+          </Magnetic>
         </motion.form>
 
         <motion.p
