@@ -43,12 +43,16 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
-            Sign in
-          </Button>
-          <Button variant="primary" size="sm">
-            Get started
-          </Button>
+          <Link href="/login">
+            <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
+              Sign in
+            </Button>
+          </Link>
+          <Link href="/signup">
+            <Button variant="primary" size="sm">
+              Get started
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
