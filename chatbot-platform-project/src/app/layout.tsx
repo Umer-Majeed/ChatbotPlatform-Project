@@ -42,9 +42,8 @@ export default function RootLayout({
   <CustomCursor />
   <SmoothScrollProvider>{children}</SmoothScrollProvider>
 </AuthSessionProvider>
-        <div className="grain-overlay" />
-        <CustomCursor />
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        
+       
       </body>
     </html>
   );
