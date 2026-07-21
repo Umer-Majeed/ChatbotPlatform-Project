@@ -48,7 +48,7 @@ export default function ForgotPasswordPage() {
             Reset your password.
           </h1>
           <p className="mt-2 text-sm text-muted">
-            Email dalo, hum reset link bhej denge.
+            Enter your email and we&apos;ll send you a reset link.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-4">
@@ -72,7 +72,7 @@ export default function ForgotPasswordPage() {
 
           <p className="mt-6 text-center text-sm text-muted">
             <Link href="/login" className="text-foreground underline underline-offset-4">
-              Wapis sign in pe jao
+              Back to sign in
             </Link>
           </p>
         </div>

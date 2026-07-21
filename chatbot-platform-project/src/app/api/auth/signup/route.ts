@@ -8,14 +8,14 @@ export async function POST(req: Request) {
 
     if (!name || !email || !password) {
       return NextResponse.json(
-        { error: "Name, email, aur password zaroori hain." },
+        { error: "Name, email, and password are required." },
         { status: 400 },
       );
     }
 
     if (password.length < 8) {
       return NextResponse.json(
-        { error: "Password kam se kam 8 characters ka hona chahiye." },
+        { error: "Password must be at least 8 characters." },
         { status: 400 },
       );
     }
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
       return NextResponse.json(
-        { error: "Is email se pehle se account bana hua hai." },
+        { error: "An account with this email already exists." },
         { status: 409 },
       );
     }
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ user }, { status: 201 });
   } catch {
     return NextResponse.json(
-      { error: "Kuch galat ho gaya, dobara koshish karo." },
+      { error: "Something went wrong. Please try again." },
       { status: 500 },
     );
   }

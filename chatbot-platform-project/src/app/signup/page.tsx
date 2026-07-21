@@ -30,7 +30,7 @@ export default function SignupPage() {
     const data = await res.json();
 
     if (!res.ok) {
-      setError(data.error ?? "Kuch galat ho gaya.");
+     setError(data.error ?? "Something went wrong.");
       setLoading(false);
       return;
     }
