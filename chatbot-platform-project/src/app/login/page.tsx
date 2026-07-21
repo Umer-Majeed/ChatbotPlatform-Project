@@ -32,6 +32,16 @@ export default function LoginPage() {
           <form className="mt-8 space-y-4">
             <Input label="Email" type="email" autoComplete="email" />
             <Input label="Password" type="password" autoComplete="current-password" />
+
+            <div className="text-right">
+              <Link
+                href="/forgot-password"
+                className="text-xs text-muted underline underline-offset-4 hover:text-foreground"
+              >
+                Forgot password?
+              </Link>
+            </div>
+
             <Magnetic strength={0.15}>
               <Button type="submit" className="w-full">
                 Sign in
