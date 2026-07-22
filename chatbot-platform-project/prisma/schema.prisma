@@ -35,4 +35,17 @@ model Business {
 
   owner   User   @relation(fields: [ownerId], references: [id])
   ownerId String
+
+  knowledgeChunks KnowledgeChunk[]
+}
+
+model KnowledgeChunk {
+  id         String   @id @default(cuid())
+  content    String
+  sourceUrl  String
+  pageTitle  String?
+  createdAt  DateTime @default(now())
+
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  businessId String
 }
